@@ -110,7 +110,7 @@ TSoftObjectPtr<UTexture2D> UXeluIconsBlueprintLibrary::GetSoftIconForInputAction
 	}
 
 	// Iterate over mappings found for the input action and return the first icon matching icon preference
-	for (const FEnhancedActionKeyMapping KeyMapping : KeyMappings)
+	for (const FEnhancedActionKeyMapping& KeyMapping : KeyMappings)
 	{
 		TSoftObjectPtr<UTexture2D> FoundIcon = GetIconTextureInternal(KeyMapping.Key, IconsDatatable, IconPreference, bShouldLoadSynchronous);
 		if (!FoundIcon.IsNull())
@@ -173,7 +173,8 @@ TArray<TSoftObjectPtr<UTexture2D>> UXeluIconsBlueprintLibrary::GetSoftIconsForAc
 	TArray<FInputActionKeyMapping> FoundActionMappings = ActionMappings.FilterByPredicate([InputName, IconPreference](const FInputActionKeyMapping& Mapping)
 	{
 		const bool bIsGamepadKey = Mapping.Key.IsGamepadKey();
-		const bool bIsValidKey = IconPreference == EXeluIconsIconType::Keyboard && !bIsGamepadKey || IconPreference != EXeluIconsIconType::Keyboard && bIsGamepadKey;
+		const bool bIsValidKey = ((IconPreference == EXeluIconsIconType::Keyboard) && !bIsGamepadKey)
+			|| ((IconPreference != EXeluIconsIconType::Keyboard) && bIsGamepadKey);
 
 		if (!bIsValidKey)
 		{
@@ -186,7 +187,7 @@ TArray<TSoftObjectPtr<UTexture2D>> UXeluIconsBlueprintLibrary::GetSoftIconsForAc
 	// We have matching actions, find texture for the keys and return that
 	if (FoundActionMappings.Num() > 0)
 	{
-		for (const FInputActionKeyMapping ActionMapping : FoundActionMappings)
+		for (const FInputActionKeyMapping& ActionMapping : FoundActionMappings)
 		{
 			TSoftObjectPtr<UTexture2D> Icon = GetIconTextureInternal(ActionMapping.Key, IconsDatatable, IconPreference, bShouldLoadSynchronous);
 			if (!Icon.IsNull())
@@ -249,7 +250,7 @@ TArray<FXeluIconsActionMappingIcons> UXeluIconsBlueprintLibrary::GetSoftIconsFor
 	TArray<FInputActionKeyMapping> FoundActionMappings = ActionMappings.FilterByPredicate([InputName, IconPreference](const FInputActionKeyMapping& Mapping)
 	{
 		const bool bIsGamepadKey = Mapping.Key.IsGamepadKey();
-		const bool bIsValidKey = IconPreference == EXeluIconsIconType::Keyboard && !bIsGamepadKey || IconPreference != EXeluIconsIconType::Keyboard && bIsGamepadKey;
+		const bool bIsValidKey = ((IconPreference == EXeluIconsIconType::Keyboard) && !bIsGamepadKey) || ((IconPreference != EXeluIconsIconType::Keyboard) && bIsGamepadKey);
 
 		if (!bIsValidKey)
 		{
@@ -262,7 +263,7 @@ TArray<FXeluIconsActionMappingIcons> UXeluIconsBlueprintLibrary::GetSoftIconsFor
 	// We have matching actions, find texture for the keys and return that
 	if (FoundActionMappings.Num() > 0)
 	{
-		for (const FInputActionKeyMapping ActionMapping : FoundActionMappings)
+		for (const FInputActionKeyMapping& ActionMapping : FoundActionMappings)
 		{
 			FXeluIconsActionMappingIcons MappingIcon;
 			MappingIcon.Key = ActionMapping.Key;

@@ -60,7 +60,7 @@ void FXeluIconsSpec::Define()
 				InputsToPath.Add(InputAction04, "/XeluIcons/Icons/Keyboard_Icons/Dark/U_Key_Dark.U_Key_Dark");
 				InputsToPath.Add(InputAction05, "/XeluIcons/Icons/Keyboard_Icons/Dark/E_Key_Dark.E_Key_Dark");
 
-				for (const auto Entry : InputsToPath)
+				for (const auto& Entry : InputsToPath)
 				{
 					FString ExpectedPath = Entry.Value;
 					UInputAction* InputAction = Entry.Key;
@@ -78,7 +78,7 @@ void FXeluIconsSpec::Define()
 				InputsToPath.Add(InputAction04, "/XeluIcons/Icons/PS4_Icons/PS4_Cross.PS4_Cross");
 				InputsToPath.Add(InputAction05, "/XeluIcons/Icons/PS4_Icons/PS4_R1.PS4_R1");
 
-				for (const auto Entry : InputsToPath)
+				for (const auto& Entry : InputsToPath)
 				{
 					FString ExpectedPath = Entry.Value;
 					UInputAction* InputAction = Entry.Key;
@@ -117,7 +117,7 @@ void FXeluIconsSpec::Define()
 				ActionKeyToPath.Add(TotallyATest_A.ActionName, "/XeluIcons/Icons/Keyboard_Icons/Dark/A_Key_Dark.A_Key_Dark");
 				ActionKeyToPath.Add(TotallyATest_NoModifier_A.ActionName, "/XeluIcons/Icons/Keyboard_Icons/Dark/A_Key_Dark.A_Key_Dark");
 
-				for (const auto Entry : ActionKeyToPath)
+				for (const auto& Entry : ActionKeyToPath)
 				{
 					FName ActionName = Entry.Key;
 					FString ExpectedPath = Entry.Value;
